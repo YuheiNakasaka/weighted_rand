@@ -1,0 +1,12 @@
+{
+  "ruby.useLanguageServer": true,
+  "ruby.useBundler": true,
+  "ruby.format": "rubocop",
+  "ruby.lint": {
+    "rubocop": true
+  },
+  "[ruby]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  }
+}
