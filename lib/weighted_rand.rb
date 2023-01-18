@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'weighted_rand/version'
-
-module WeightedRand
-  class Error < StandardError
-  end
-  # Your code goes here...
-end
+require 'weighted_rand/version'
+require 'weighted_rand/linear'
+require 'weighted_rand/binary_search'
+require 'weighted_rand/walker_alias'
+require 'weighted_rand/errors'

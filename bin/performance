@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require 'weighted_rand'
+
+def run_test
+  count = 10
+  weight_size = 10_000
+  weights = {}
+  weight_size.times do |i|
+    weights["#{i}"] = rand(weight_size) + 1
+  end
+
+  # Linear
+  result = weights.map { |k, _| [k, 0] }.to_h
+  t = Time.now.to_f
+  weighted_rand = WeightedRand::Linear.new(weights)
+  count.times do
+    k = weighted_rand.sample
+    result[k] += 1
+  end
+  d = Time.now.to_f - t
+  puts "Linear: #{d}"
+
+  # BinarySearch
+  result = weights.map { |k, _| [k, 0] }.to_h
+  t = Time.now.to_f
+  weighted_rand = WeightedRand::BinarySearch.new(weights)
+  count.times do
+    k = weighted_rand.sample
+    result[k] += 1
+  end
+  d = Time.now.to_f - t
+  puts "BinarySearch: #{d}"
+
+  # WalkerAlias
+  result = weights.map { |k, _| [k, 0] }.to_h
+  t = Time.now.to_f
+  weighted_rand = WeightedRand::WalkerAlias.new(weights)
+  count.times do
+    k = weighted_rand.sample
+    result[k] += 1
+  end
+  d = Time.now.to_f - t
+  puts "WalkerAlias: #{d}"
+end
+
+run_test
